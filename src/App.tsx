@@ -1,10 +1,9 @@
 import { Heading } from "@chakra-ui/react";
+import Login from "./Pages/Login";
 
 const App = () => {
   return (
-    <Heading as="h1" fontSize="2xl">
-      Hamburgueria
-    </Heading>
+   <Login/>
   );
 };
 
