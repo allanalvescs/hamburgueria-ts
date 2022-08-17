@@ -1,7 +1,7 @@
-import Dashboard from "./Pages/Dashboard";
+import Routes from "./Routes";
 
 const App = () => {
-  return <Dashboard />;
+  return <Routes />;
 };
 
 export default App;

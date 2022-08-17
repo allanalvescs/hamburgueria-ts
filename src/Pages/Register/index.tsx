@@ -82,6 +82,7 @@ const Register = () => {
             color="gray.500"
             fontWeight="bold"
             _hover={{ cursor: "pointer", textDecoration: "none" }}
+            href="/"
           >
             Ir para o login
           </Link>

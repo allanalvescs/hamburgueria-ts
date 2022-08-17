@@ -5,6 +5,7 @@ import {
   useCallback,
   useState,
 } from "react";
+import { useHistory } from "react-router-dom";
 
 import api from "../../Server/api";
 
@@ -40,6 +41,7 @@ interface AuthContextDatas {
   singIn(data: DataLogin): Promise<void>;
   user: User;
   accessToken: string;
+  loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextDatas>({} as AuthContextDatas);
@@ -47,6 +49,7 @@ const AuthContext = createContext<AuthContextDatas>({} as AuthContextDatas);
 const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
+  const [loading, setLoading] = useState(false);
   const [dataUser, setDataUser] = useState<DataUser>(() => {
     const user = localStorage.getItem("@Hamburgueria:User");
     const token = localStorage.getItem("@Hamburgueria:Token");
@@ -58,7 +61,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     return {} as DataUser;
   });
 
+  const history = useHistory();
+
   const singIn = useCallback(async ({ email, password }: DataLogin) => {
+    setLoading(true);
     try {
       const response = await api.post("/login", { email, password });
 
@@ -69,7 +75,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       localStorage.setItem("@Hamburgueria:Token", response.data.accessToken);
 
       setDataUser(response.data);
+      setLoading(false);
+      history.push("/dashboard");
     } catch (err) {
+      setLoading(false);
       console.log(err);
     }
   }, []);
@@ -93,6 +102,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         singIn,
         user: dataUser.user,
         accessToken: dataUser.accessToken,
+        loading,
       }}
     >
       {children}
