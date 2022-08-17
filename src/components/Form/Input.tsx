@@ -5,12 +5,15 @@ import {
   Input as ChakraInput,
   InputProps as ChakraInputProps,
   InputGroup,
+  InputLeftElement,
+  InputRightElement,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useCallback } from "react";
 
 import { forwardRef, ForwardRefRenderFunction, useState } from "react";
 import { FieldError } from "react-hook-form";
+import { IconType } from "react-icons";
 
 type VariantionOptions = {
   [key: string]: string;
@@ -56,7 +59,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
 
   return (
     <FormControl isInvalid={!!error}>
-      <InputGroup flexDir="column" h="65px" w="100%" position="relative">
+      <InputGroup flexDir="column" h="60px" w="100%" position="relative">
         {label && (
           <FormLabel
             color="gray.500"
@@ -72,6 +75,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
             {label}
           </FormLabel>
         )}
+
         <ChakraInput
           {...rest}
           name={name}
@@ -84,7 +88,6 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
           onFocus={handleInputFocus}
           borderColor={InputVariation[variation]}
           bg="gray.50"
-          mt="4"
           h="65px"
         />
       </InputGroup>
