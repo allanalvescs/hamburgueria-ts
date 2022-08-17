@@ -59,13 +59,13 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
 
   return (
     <FormControl isInvalid={!!error}>
-      <InputGroup flexDir="column" h="60px" w="100%" position="relative">
+      <InputGroup flexDir="column" h="65px" w="100%" position="relative">
         {label && (
           <FormLabel
             color="gray.500"
             fontSize="xs"
             position="absolute"
-            top="2"
+            top="-2"
             left="5"
             zIndex="10"
             bg="gray.50"
