@@ -1,9 +1,11 @@
 import { Button, Heading } from "@chakra-ui/react";
+import { useAuth } from "../../Providers/modules/AuthContext";
 
 const Dashboard = () => {
+  const { user } = useAuth();
   return (
     <>
-      <Heading>Dashboard</Heading>
+      <Heading>Welcome {user.name}</Heading>
       <Button>Dewslogar</Button>
     </>
   );

@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import Input from "../../components/Form/Input";
 import LoginInfor from "./LoginInfor";
+import { useAuth } from "../../Providers/modules/AuthContext";
 
 interface FormData {
   email: string;
@@ -29,7 +30,11 @@ const Login = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const handleSubmitData = (data: FormData) => console.log(data);
+  const { singIn } = useAuth();
+
+  const handleSubmitData = (data: FormData) => {
+    singIn(data);
+  };
   return (
     <Flex
       alignItems="center"
@@ -37,6 +42,7 @@ const Login = () => {
       h="100vh"
       w="100%"
       flexDir={["column-reverse", "column-reverse", "row", "row"]}
+      bgGradient="linear(to-r,green.100 65%, white 25%)"
     >
       <Grid
         as="form"
@@ -48,6 +54,7 @@ const Login = () => {
         paddingY="6"
         paddingX="10"
         mt={["6", "6", "0", "0"]}
+        bg="white"
       >
         <Heading as="h3" fontSize="lg">
           Login

@@ -31,6 +31,7 @@ const LoginInfor = () => {
         borderWidth="2px"
         borderColor="gray.100"
         borderRadius="5px"
+        bg="white"
       >
         <Center
           bg="#27AE601A"

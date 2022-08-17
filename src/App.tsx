@@ -1,7 +1,7 @@
-import Register from "./Pages/Register";
+import Dashboard from "./Pages/Dashboard";
 
 const App = () => {
-  return <Register />;
+  return <Dashboard />;
 };
 
 export default App;

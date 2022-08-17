@@ -14,6 +14,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import Input from "../../components/Form/Input";
 import RegisterInfor from "./RegisterInfor";
+import { useAuth } from "../../Providers/modules/AuthContext";
 
 interface FormData {
   name: string;
@@ -22,7 +23,7 @@ interface FormData {
   confirm_password: string;
 }
 
-const RegisterSchema = yup.object().shape({
+const registerSchema = yup.object().shape({
   name: yup.string().required("Campo Obrigatório"),
   email: yup.string().required("Campo Obrigatório *").email("Email inválido!"),
   password: yup
@@ -41,10 +42,14 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: yupResolver(RegisterSchema),
+    resolver: yupResolver(registerSchema),
   });
 
-  const handleSubmitData = (data: FormData) => console.log(data);
+  const { registerUser } = useAuth();
+
+  const handleSubmitData = (data: FormData) => {
+    registerUser(data);
+  };
   return (
     <Flex
       alignItems="center"
