@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Input from "../../components/Form/Input";
 import LoginInfor from "./LoginInfor";
 import { useAuth } from "../../Providers/modules/AuthContext";
+import { useHistory } from "react-router-dom";
 
 interface FormData {
   email: string;
@@ -30,7 +31,8 @@ const Login = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const { singIn } = useAuth();
+  const { singIn, loading } = useAuth();
+  const history = useHistory();
 
   const handleSubmitData = (data: FormData) => {
     singIn(data);
@@ -79,6 +81,7 @@ const Login = () => {
 
         <VStack mt="6">
           <Button
+            isLoading={loading}
             w="100%"
             h="60px"
             borderRadius="6px"
@@ -100,6 +103,8 @@ const Login = () => {
             color="gray.200"
             bg="gray.100"
             _hover={{ bg: "gray.50" }}
+            type="button"
+            onClick={() => history.push("/register")}
           >
             Cadastrar
           </Button>
