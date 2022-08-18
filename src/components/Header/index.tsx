@@ -1,9 +1,13 @@
-import { Box, Button, Center, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Center, Flex, Heading, Text } from "@chakra-ui/react";
 import { FaShoppingCart } from "react-icons/fa";
 import { FiLogOut, FiSearch } from "react-icons/fi";
 import SearchBox from "../Form/SearchBox";
 
-const Header = () => {
+interface HeaderProps {
+  onModalLogoutOpen(): void;
+}
+
+const Header = ({ onModalLogoutOpen }: HeaderProps) => {
   return (
     <Flex
       as="header"
@@ -88,6 +92,7 @@ const Header = () => {
           h="50px"
           transition="0.5s all"
           _hover={{ color: "green.200" }}
+          onClick={onModalLogoutOpen}
         >
           <FiLogOut />
         </Center>
