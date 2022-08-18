@@ -39,6 +39,7 @@ interface DataUser {
 interface AuthContextDatas {
   registerUser(data: DataRegister): Promise<void>;
   singIn(data: DataLogin): Promise<void>;
+  singOut(): void;
   user: User;
   accessToken: string;
   loading: boolean;
@@ -83,6 +84,13 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }, []);
 
+  const singOut = useCallback(() => {
+    localStorage.removeItem("@Hamburgueria:User");
+    localStorage.removeItem("@Hamburgueria:Token");
+
+    setDataUser({} as DataUser);
+  }, []);
+
   const registerUser = useCallback(
     async ({ name, email, password }: DataRegister) => {
       try {
@@ -100,6 +108,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       value={{
         registerUser,
         singIn,
+        singOut,
         user: dataUser.user,
         accessToken: dataUser.accessToken,
         loading,
