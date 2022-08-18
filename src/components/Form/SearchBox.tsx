@@ -13,7 +13,7 @@ const SearchBox = () => {
       borderRadius="6px"
       display={["none", "none", "flex", "flex"]}
     >
-      <Input name="name" placeholder="Digitar Pesquisa" border="none" />
+      <Input name="name" placeholder="Digitar Pesquisa" border="none" mt="0" />
 
       <Button
         ml="2"
