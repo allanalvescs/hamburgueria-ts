@@ -85,8 +85,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   }, []);
 
   const singOut = useCallback(() => {
-    localStorage.removeItem("@Hamburgueria:User");
     localStorage.removeItem("@Hamburgueria:Token");
+    localStorage.removeItem("@Hamburgueria:User");
+    localStorage.removeItem("@Hamburgueria:Cart");
 
     setDataUser({} as DataUser);
   }, []);
@@ -96,6 +97,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       try {
         const response = await api.post("/register", { name, email, password });
 
+        history.push("/");
         console.log(response.data);
       } catch (err) {
         console.log(err);

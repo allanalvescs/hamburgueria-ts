@@ -13,13 +13,22 @@ const ListProducts = () => {
   }, []);
   return (
     <Grid
-      templateColumns="repeat(4,1fr)"
-      gap={6}
-      w="1402px"
+      templateColumns={[
+        "repeat(8,1fr)",
+        "repeat(8,1fr)",
+        "repeat(2,1fr)",
+        "repeat(3,1fr)",
+        "repeat(4,1fr)",
+      ]}
+      // gap={2}
+      rowGap={8}
+      columnGap={6}
+      w={["90vw", "90vw", "90vw", "90vw"]}
       margin="auto"
       mt="16"
+      overflow={["scroll", "scroll", "hidden", "hidden"]}
     >
-      {products.map((product) => (
+      {products.map((product, index) => (
         <Products key={product.id} product={product} />
       ))}
     </Grid>

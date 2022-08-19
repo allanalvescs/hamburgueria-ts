@@ -1,6 +1,7 @@
 import { Box, Center, Flex, Heading, Text } from "@chakra-ui/react";
 import { FaShoppingCart } from "react-icons/fa";
 import { FiLogOut, FiSearch } from "react-icons/fi";
+import { useProducts } from "../../Providers/modules/ProductsContext";
 import SearchBox from "../Form/SearchBox";
 
 interface HeaderProps {
@@ -8,6 +9,7 @@ interface HeaderProps {
 }
 
 const Header = ({ onModalLogoutOpen }: HeaderProps) => {
+  const { cartProducts } = useProducts();
   return (
     <Flex
       as="header"
@@ -79,7 +81,7 @@ const Header = ({ onModalLogoutOpen }: HeaderProps) => {
             left="28px"
             top="0px"
           >
-            0
+            {cartProducts.length}
           </Box>
         </Center>
 
