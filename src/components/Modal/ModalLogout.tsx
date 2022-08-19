@@ -20,6 +20,7 @@ interface ModalLogoutProps {
 }
 
 const ModalLogout = ({ isOpen, onClose, singOut }: ModalLogoutProps) => {
+  const { user } = useAuth();
   return (
     <Drawer placement="top" onClose={onClose} isOpen={isOpen}>
       <DrawerOverlay bg="transparent" />
@@ -34,15 +35,20 @@ const ModalLogout = ({ isOpen, onClose, singOut }: ModalLogoutProps) => {
           <Heading as="h1" fontSize="lg" color="gray.600">
             Sair da minha conta
           </Heading>
-          <Center
-            color="white"
-            bg="gray.400"
-            w="45px"
-            h="45px"
-            borderRadius="100%"
-          >
-            <FiUser />
-          </Center>
+          <Flex flexDir="column" alignItems="center">
+            <Center
+              color="white"
+              bg="gray.400"
+              w="45px"
+              h="45px"
+              borderRadius="100%"
+            >
+              <FiUser />
+            </Center>
+            <Text color="gray.200" fontSize="x-small" mt="2">
+              {user.name}
+            </Text>
+          </Flex>
         </DrawerHeader>
         <DrawerBody>
           <Center as="button" w="100%" h="80px" onClick={singOut}>

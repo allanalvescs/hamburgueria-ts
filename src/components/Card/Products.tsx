@@ -7,13 +7,14 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import { useAuth } from "../../Providers/modules/AuthContext";
+import { useProducts } from "../../Providers/modules/ProductsContext";
 
 interface Product {
   image: string;
   title: string;
   category: string;
   price: number;
-  id: number;
 }
 
 interface ProductsProps {
@@ -21,8 +22,22 @@ interface ProductsProps {
 }
 
 const Products = ({
-  product: { category, id, title, image, price },
+  product: { title, image, category, price },
 }: ProductsProps) => {
+  const { addToCart } = useProducts();
+  const { accessToken, user } = useAuth();
+
+  const handleAddToCart = () => {
+    const newData = {
+      title,
+      image,
+      category,
+      price,
+      quantity: 1,
+      userId: user.id,
+    };
+    addToCart(newData, accessToken);
+  };
   return (
     <Flex
       w="300px"
@@ -76,6 +91,7 @@ const Products = ({
           transition="ease-out .6s"
           _hover={{ bg: "green.300" }}
           fontSize="sm"
+          onClick={handleAddToCart}
         >
           Adicionar
         </Button>
