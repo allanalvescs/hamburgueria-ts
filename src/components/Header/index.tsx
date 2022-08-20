@@ -7,9 +7,14 @@ import SearchBox from "../Form/SearchBox";
 interface HeaderProps {
   onModalLogoutOpen(): void;
   onModalCartOpen(): void;
+  onModalSearchOpen(): void;
 }
 
-const Header = ({ onModalLogoutOpen, onModalCartOpen }: HeaderProps) => {
+const Header = ({
+  onModalLogoutOpen,
+  onModalCartOpen,
+  onModalSearchOpen,
+}: HeaderProps) => {
   const { cartProducts } = useProducts();
   return (
     <Flex
@@ -54,6 +59,7 @@ const Header = ({ onModalLogoutOpen, onModalCartOpen }: HeaderProps) => {
           h="50px"
           transition="0.5s all"
           _hover={{ color: "green.200" }}
+          onClick={onModalSearchOpen}
         >
           <FiSearch />
         </Center>
