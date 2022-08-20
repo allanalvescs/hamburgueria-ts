@@ -45,6 +45,7 @@ interface ProductsContextDatas {
     newProduct: UpdateProduct,
     accessToken: string
   ): Promise<void>;
+  SearchProducts(Product: string, accessToken: string): Promise<void>;
 }
 
 const ProductsContext = createContext<ProductsContextDatas>(
@@ -117,11 +118,28 @@ const PorductsProvider = ({ children }: ProductsProviderProps) => {
 
   const removeFromCart = useCallback(
     async (idProduct: string, accessToken: string) => {
-      api.delete(`/cart/${idProduct}`, {
+      await api.delete(`/cart/${idProduct}`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
     },
     [cartProducts]
+  );
+
+  const SearchProducts = useCallback(
+    async (Product: string, accessToken: string) => {
+      try {
+        const response = await api.get(`products?category_like=${Product}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        setProducts(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    []
   );
   const order = useCallback(
     async (
@@ -129,7 +147,7 @@ const PorductsProvider = ({ children }: ProductsProviderProps) => {
       newProduct: UpdateProduct,
       accessToken: string
     ) => {
-      api
+      await api
         .patch(`/cart/${idProduct}`, newProduct, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -151,6 +169,7 @@ const PorductsProvider = ({ children }: ProductsProviderProps) => {
         loadCart,
         removeFromCart,
         order,
+        SearchProducts,
       }}
     >
       {children}

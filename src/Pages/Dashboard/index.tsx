@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import Header from "../../components/Header";
 import ModalCart from "../../components/Modal/ModalCart";
 import ModalLogout from "../../components/Modal/ModalLogout";
+import ModalSearch from "../../components/Modal/ModalSearch";
 import { useAuth } from "../../Providers/modules/AuthContext";
 import { useProducts } from "../../Providers/modules/ProductsContext";
 
@@ -21,6 +22,12 @@ const Dashboard = () => {
     onOpen: onModalCartOpen,
   } = useDisclosure();
 
+  const {
+    isOpen: isModalSearchOpen,
+    onClose: onModalSearchClose,
+    onOpen: onModalSearchOpen,
+  } = useDisclosure();
+
   const { singOut, accessToken, user } = useAuth();
   const { loadCart } = useProducts();
 
@@ -37,10 +44,12 @@ const Dashboard = () => {
         onClose={onModalLogoutClose}
         singOut={singOut}
       />
+      <ModalSearch onClose={onModalSearchClose} isOpen={isModalSearchOpen} />
       <ModalCart isOpen={isModalCartOpen} onClose={onModalCartClose} />
       <Header
         onModalLogoutOpen={onModalLogoutOpen}
         onModalCartOpen={onModalCartOpen}
+        onModalSearchOpen={onModalSearchOpen}
       />
       <ListProducts />
     </>
