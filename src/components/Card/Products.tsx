@@ -15,6 +15,7 @@ interface Product {
   title: string;
   category: string;
   price: number;
+  id: string;
 }
 
 interface ProductsProps {
@@ -22,9 +23,9 @@ interface ProductsProps {
 }
 
 const Products = ({
-  product: { title, image, category, price },
+  product: { title, image, category, price, id },
 }: ProductsProps) => {
-  const { addToCart } = useProducts();
+  const { addToCart, cartProducts } = useProducts();
   const { accessToken, user } = useAuth();
 
   const handleAddToCart = () => {
